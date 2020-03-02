@@ -9,17 +9,17 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using lbh_housingpatches_api.UseCase.V1;
-using lbh_housingpatches_api.V1.Boundary;
-using lbh_housingpatches_api.V1.Gateways;
-using lbh_housingpatches_api.V1.Infrastructure;
-using lbh_housingpatches_api.Versioning;
+using base_api.UseCase.V1;
+using base_api.V1.Boundary;
+using base_api.V1.Gateways;
+using base_api.V1.Infrastructure;
+using base_api.Versioning;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace lbh_housingpatches_api
+namespace base_api
 {
     public class Startup
     {
@@ -109,12 +109,12 @@ namespace lbh_housingpatches_api
 
         private static void RegisterGateWays(IServiceCollection services)
         {
-            services.AddSingleton<ITransactionsGateway, TransactionsGateway>();
+
         }
 
         private static void RegisterUseCases(IServiceCollection services)
         {
-            services.AddSingleton<IListTransactions, ListTransactionsUsecase>();
+
         }
 
 

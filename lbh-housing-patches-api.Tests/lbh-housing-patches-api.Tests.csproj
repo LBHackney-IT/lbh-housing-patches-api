@@ -16,6 +16,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="V1\Domain"/>
+    <Folder Include="V1\Factories"/>
+    <Folder Include="V1\Gateways"/>
+    <Folder Include="V1\Helper"/>
+    <Folder Include="V1\Infrastructure"/>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\lbh-housing-patches-api\lbh-housing-patches-api.csproj" />
   </ItemGroup>
 
