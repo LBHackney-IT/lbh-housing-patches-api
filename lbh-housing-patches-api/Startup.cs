@@ -99,12 +99,7 @@ namespace base_api
 
         private static void ConfigureDbContext(IServiceCollection services)
         {
-            var connectionString = Environment.GetEnvironmentVariable("UH_URL");
 
-            DbContextOptionsBuilder builder = new DbContextOptionsBuilder()
-                .UseSqlServer(connectionString);
-
-            services.AddSingleton<IUHContext>(s => new UhContext(builder.Options));
         }
 
         private static void RegisterGateWays(IServiceCollection services)
