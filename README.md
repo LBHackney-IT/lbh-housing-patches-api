@@ -1,6 +1,6 @@
-# LBH Base API
+# LBH Housing Patches API
 
-Base API is a boilerplate code for being reused for new APIs for LBH
+Housing Patches API restrieves Patches and Area information by Contact ID
 
 ## Stack
 
@@ -66,14 +66,12 @@ $ make test
 
 ### Active Maintainers
 
-- **Selwyn Preston**, Lead Developer at London Borough of Hackney (selwyn.preston@hackney.gov.uk)
-- **Mirela Georgieva**, Developer at London Borough of Hackney (mirela.georgieva@hackney.gov.uk)
-- **Miguel Saitz**, Junior Developer at London Borough of Hackney (miguel.saitz@hackney.gov.uk)
+- **Ben Reynolds-Carr**, Junior Developer at London Borough of Hackney (ben.reynolds-carr@hackney.gov.uk)
+- **Alex Demetriou**, Junior Developer at London Borough of Hackney (alex.demetriou@hackney.gov.uk) 
 
 ### Other Contacts
 
-- **Rashmi Shetty**, Development Manager at London Borough of Hackney (rashmi.shetty@hackney.gov.uk)
-- **Cormac Brady**, Developer at [Made Tech][made-tech] (cormac@madetech.com)
+- **Mirela Georgieva**, Lead Developer at London Borough of Hackney (mirela.georgieva@hackney.gov.uk)
 
 
 [docker-download]: https://www.docker.com/products/docker-desktop
