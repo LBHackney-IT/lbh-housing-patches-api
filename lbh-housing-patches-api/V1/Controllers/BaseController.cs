@@ -4,7 +4,7 @@ using Newtonsoft.Json.Serialization;
 
 namespace lbh_housingpatches_api.Controllers.V1
 {
-    public class BaseController  : Controller
+    public class BaseController : Controller
     {
         public BaseController()
         {
@@ -16,11 +16,11 @@ namespace lbh_housingpatches_api.Controllers.V1
             JsonConvert.DefaultSettings = () =>
             {
                 var settings = new JsonSerializerSettings();
-                settings.Formatting = Formatting.Indented;
+                settings.Formatting       = Formatting.Indented;
                 settings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 
                 settings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
-                settings.DateFormatHandling = DateFormatHandling.IsoDateFormat;
+                settings.DateFormatHandling   = DateFormatHandling.IsoDateFormat;
 
                 return settings;
             };

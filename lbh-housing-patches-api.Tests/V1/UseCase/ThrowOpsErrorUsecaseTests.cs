@@ -9,7 +9,7 @@ namespace UnitTests.V1.UseCase
         [Test]
         public void ThrowsTestOpsErrorException()
         {
-            TestOpsErrorException ex = Assert.Throws<TestOpsErrorException>(
+            var ex = Assert.Throws<TestOpsErrorException>(
                 delegate { ThrowOpsErrorUsecase.Execute(); });
 
             Assert.That(ex.Message, Is.EqualTo("This is a test exception to test our integrations"));

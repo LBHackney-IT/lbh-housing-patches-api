@@ -6,7 +6,6 @@ using lbh_housingpatches_api.UseCase.V1;
 
 namespace UnitTests.V1.Controllers
 {
-
     [TestFixture]
     public class HealthCheckControllerTests
     {
@@ -25,9 +24,8 @@ namespace UnitTests.V1.Controllers
             var response = _classUnderTest.HealthCheck() as OkObjectResult;
 
             Assert.NotNull(response);
-            Assert.AreEqual(response.StatusCode, 200);
+            Assert.AreEqual(response.StatusCode,                                200);
             Assert.AreEqual(new Dictionary<string, object> {{"success", true}}, response.Value);
-
         }
 
         [Test]

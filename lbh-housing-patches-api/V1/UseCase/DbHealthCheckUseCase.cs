@@ -16,9 +16,8 @@ namespace lbh_housingpatches_api.UseCase.V1
         {
             var result = _healthCheckService.CheckHealthAsync().Result;
 
-            bool success = result.CheckStatus == CheckStatus.Healthy;
+            var success = result.CheckStatus == CheckStatus.Healthy;
             return new HealthCheckResponse(success, result.Description);
         }
     }
-
 }

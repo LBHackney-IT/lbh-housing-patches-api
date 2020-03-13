@@ -1,5 +1,4 @@
 using System.Threading;
-using System.Threading.Tasks;
 using Bogus;
 using Microsoft.Extensions.HealthChecks;
 using NUnit.Framework;
@@ -11,12 +10,11 @@ namespace UnitTests.V1.UseCase
     [TestFixture]
     public class DbHealthCheckUseCaseTests
     {
-
         private Mock<IHealthCheckService> _mockHealthCheckService;
-        private DbHealthCheckUseCase _classUnderTest;
+        private DbHealthCheckUseCase      _classUnderTest;
 
-        private readonly Faker _faker = new Faker();
-        private string _description;
+        private readonly Faker  _faker = new Faker();
+        private          string _description;
 
         [SetUp]
         public void SetUp()
@@ -24,7 +22,7 @@ namespace UnitTests.V1.UseCase
             _description = _faker.Random.Words();
 
             _mockHealthCheckService = new Mock<IHealthCheckService>();
-            CompositeHealthCheckResult compositeHealthCheckResult = new CompositeHealthCheckResult(CheckStatus.Healthy);
+            var compositeHealthCheckResult = new CompositeHealthCheckResult(CheckStatus.Healthy);
             compositeHealthCheckResult.Add("test", CheckStatus.Healthy, _description);
 
 

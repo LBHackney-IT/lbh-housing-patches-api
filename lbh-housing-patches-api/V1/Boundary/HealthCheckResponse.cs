@@ -10,7 +10,7 @@ namespace lbh_housingpatches_api.V1.Boundary
             Message = message;
         }
 
-        public readonly bool Success;
+        public readonly bool   Success;
         public readonly string Message;
     }
 }

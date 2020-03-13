@@ -3,23 +3,22 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using lbh_housingpatches_api.V1.UseCase;
+using lbh_housingpatches_api.V1.Gateways;
+using lbh_housingpatches_api.V1.Infrastructure;
+using lbh_housingpatches_api.Versioning;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using base_api.UseCase.V1;
-using base_api.V1.Boundary;
-using base_api.V1.Gateways;
-using base_api.V1.Infrastructure;
-using base_api.Versioning;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.Versioning;
+using Microsoft.Xrm.Sdk.WebServiceClient;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace base_api
+namespace lbh_housingpatches_api
 {
     public class Startup
     {
@@ -29,7 +28,9 @@ namespace base_api
         }
 
         public IConfiguration Configuration { get; }
+
         private static List<ApiVersionDescription> _apiVersions { get; set; }
+
         //TODO update the below to the name of your API
         private const string ApiName = "Your API Name";
 
@@ -40,8 +41,10 @@ namespace base_api
             services.AddApiVersioning(o =>
             {
                 o.DefaultApiVersion = new ApiVersion(1, 0);
-                o.AssumeDefaultVersionWhenUnspecified = true; // assume that the caller wants the default version if they don't specify
-                o.ApiVersionReader = new UrlSegmentApiVersionReader(); // read the version number from the url segment header)
+                o.AssumeDefaultVersionWhenUnspecified =
+                    true; // assume that the caller wants the default version if they don't specify
+                o.ApiVersionReader =
+                    new UrlSegmentApiVersionReader(); // read the version number from the url segment header)
             });
             services.AddSingleton<IApiVersionDescriptionProvider, DefaultApiVersionDescriptionProvider>();
 
@@ -50,10 +53,10 @@ namespace base_api
                 c.AddSecurityDefinition("Token",
                     new ApiKeyScheme
                     {
-                        In = "header",
+                        In          = "header",
                         Description = "Your Hackney API Key",
-                        Name = "X-Api-Key",
-                        Type = "apiKey"
+                        Name        = "X-Api-Key",
+                        Type        = "apiKey"
                     });
                 c.AddSecurityRequirement(new Dictionary<string, IEnumerable<string>>
                 {
@@ -79,9 +82,10 @@ namespace base_api
                     var version = $"v{apiVersion.ApiVersion.ToString()}";
                     c.SwaggerDoc(version, new Info
                     {
-                        Title = $"{ApiName}-api {version}",
+                        Title   = $"{ApiName}-api {version}",
                         Version = version,
-                        Description = $"{ApiName} version {version}. Please check older versions for depreceted endpoints."
+                        Description =
+                            $"{ApiName} version {version}. Please check older versions for depreceted endpoints."
                     });
                 }
 
@@ -92,39 +96,30 @@ namespace base_api
                 if (File.Exists(xmlPath))
                     c.IncludeXmlComments(xmlPath);
             });
-            ConfigureDbContext(services);
-            RegisterGateWays(services);
+            ConfigureCrmContext(services);
+            RegisterGateways(services);
             RegisterUseCases(services);
         }
 
-        private static void ConfigureDbContext(IServiceCollection services)
+        private static void ConfigureCrmContext(IServiceCollection services)
         {
-
         }
 
-        private static void RegisterGateWays(IServiceCollection services)
+        private static void RegisterGateways(IServiceCollection services)
         {
-
         }
 
         private static void RegisterUseCases(IServiceCollection services)
         {
-
         }
-
-
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
-            {
                 app.UseDeveloperExceptionPage();
-            }
             else
-            {
                 app.UseHsts();
-            }
 
             //Get All ApiVersions,
             var api = app.ApplicationServices.GetService<IApiVersionDescriptionProvider>();
@@ -134,11 +129,9 @@ namespace base_api
             app.UseSwaggerUI(c =>
             {
                 foreach (var apiVersionDescription in _apiVersions)
-                {
                     //Create a swagger endpoint for each swagger version
                     c.SwaggerEndpoint($"{apiVersionDescription.GetFormattedApiVersion()}/swagger.json",
                         $"{ApiName}-api {apiVersionDescription.GetFormattedApiVersion()}");
-                }
             });
 
             app.UseSwagger();
