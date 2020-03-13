@@ -83,7 +83,7 @@ jobs:
 workflows:
   build-and-test:
       jobs:
-        -check
+      - check
   
   # build-and-deploy:
   #     jobs:
