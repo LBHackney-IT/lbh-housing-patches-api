@@ -1,8 +1,8 @@
 version: 2.1
 
-# orbs:
-#   aws-ecr: circleci/aws-ecr@3.0.0
-#   aws-cli: circleci/aws-cli@0.1.9
+orbs:
+  aws-ecr: circleci/aws-ecr@3.0.0
+  aws-cli: circleci/aws-cli@0.1.9
 
 # commands:
 #   deploy-env:
@@ -84,6 +84,7 @@ workflows:
   build-and-test:
       jobs:
         -check
+  
   # build-and-deploy:
   #     jobs:
   #     - check
