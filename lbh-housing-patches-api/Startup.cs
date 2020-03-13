@@ -65,7 +65,7 @@ namespace lbh_housingpatches_api
                 //Controllers must have this [ApiVersion("x")] to be included in swagger documentation!!
                 c.DocInclusionPredicate((docName, apiDesc) =>
                 {
-                    var versions = apiDesc.ControllerAttributes()
+                    var versions = apiDesc.ControllerAtributes()
                         .OfType<ApiVersionAttribute>()
                         .SelectMany(attr => attr.Versions).ToList();
 
