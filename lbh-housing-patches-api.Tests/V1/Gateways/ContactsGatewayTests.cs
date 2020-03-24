@@ -28,23 +28,23 @@ namespace UnitTests.V1.Gateways
             Assert.That(response, Is.Not.Null);
         }
 
-        [Test]
-        public void WithAnyContactId_GivesExpectedResponseType()
-        {
-            var request  = new RetrieveContactsRequest();
-            var response = _classUnderTest.GetContactForAttribute(request);
+        // [Test]
+        // public void WithAnyContactId_GivesExpectedResponseType()
+        // {
+        //     var request  = new RetrieveContactsRequest();
+        //     var response = _classUnderTest.GetContactForAttribute(request);
 
-            Assert.That(response, Is.InstanceOf<RetrieveContactsResponse>());
-        }
+        //     Assert.That(response, Is.InstanceOf<RetrieveContactsResponse>());
+        // }
 
         // TODO:
-        [Test]
-        public void GetContactForAttribute_WithSpecificContactId_GivesExpectedResponse()
-        {
-            var request  = new RetrieveContactsRequest();
-            var response = _classUnderTest.GetContactForAttribute(request);
+        // [Test]
+        // public void GetContactForAttribute_WithSpecificContactId_GivesExpectedResponse()
+        // {
+        //     var request  = new RetrieveContactsRequest();
+        //     var response = _classUnderTest.GetContactForAttribute(request);
 
-            Assert.That(response, Contains.Item(new { }));
-        }
+        //     Assert.That(response, Contains.Item(new { }));
+        // }
     }
 }
