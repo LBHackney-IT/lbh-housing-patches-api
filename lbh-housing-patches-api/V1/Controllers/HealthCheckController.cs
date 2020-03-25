@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 
-namespace lbh_housingpatches_api.Controllers.V1
+namespace lbh_housingpatches_api.V1.Controllers
 {
     [Route("api/v1/healthcheck")]
     [ApiController]
