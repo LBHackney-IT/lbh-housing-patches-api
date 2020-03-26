@@ -16,7 +16,8 @@ namespace UnitTests.V1.Helper
             return new JObject 
             { 
                 { "hackney_houseref", "FakeHouseRef" }, 
-                { "hackney_uprn", "FakeUprn" } 
+                { "hackney_uprn", "FakeUprn" }, 
+                { "address1_composite", "FakeAddress" }
             };
         }
     }

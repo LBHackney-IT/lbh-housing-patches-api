@@ -19,7 +19,9 @@ namespace lbh_housingpatches_api.V1.Gateways
             var contact = new Contact 
             { 
                 HouseRef = jsonContact["hackney_houseref"].ToString(), 
-                Uprn = jsonContact["hackney_uprn"].ToString()
+                Uprn = jsonContact["hackney_uprn"].ToString(),
+                Address = jsonContact["address1_composite"].ToString()
+
             };
 
             return new List<Contact>{ contact };
