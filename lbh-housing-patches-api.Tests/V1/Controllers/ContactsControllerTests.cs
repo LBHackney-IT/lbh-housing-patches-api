@@ -1,4 +1,6 @@
 using lbh_housingpatches_api.V1.Controllers;
+using lbh_housingpatches_api.V1.Domain;
+using Microsoft.AspNetCore.Mvc;
 using NUnit.Framework;
 
 namespace UnitTests.V1.Controllers
@@ -22,12 +24,12 @@ namespace UnitTests.V1.Controllers
             Assert.That(response.StatusCode, Is.EqualTo(200));
 
         }
-        // [Test]
-        // public void ReturnsContact()
-        // {
-        //     var response = _classUnderTest.GetContacts();
+        [Test]
+        public void GetsContact_ReturnsJsonResult()
+        {
+            var response = _classUnderTest.GetContacts();
 
-        //     Assert.That(response, Is.InstanceOf<Contact>());
-        // }
+            Assert.That(response, Is.InstanceOf<JsonResult>());
+        }
     }
 }
