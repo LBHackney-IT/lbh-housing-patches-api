@@ -3,6 +3,7 @@ using System.Linq;
 using lbh_housingpatches_api.V1.Domain;
 using lbh_housingpatches_api.V1.Gateways;
 using NUnit.Framework;
+using UnitTests.V1.Helper;
 
 namespace UnitTests.V1.Gateways
 {
@@ -10,20 +11,21 @@ namespace UnitTests.V1.Gateways
     public class ContactsGatewayTest
     {
         private ContactsGateway _classUnderTest;
-        const string housingref = "0900318";
-        const string personno = "2";
+        private DynamicsContextStub _dynamicsContext;
 
         [SetUp]
         public void SetUp()
         {
-            _classUnderTest = new ContactsGateway();
+            _dynamicsContext = new DynamicsContextStub();
+            _classUnderTest = new ContactsGateway(_dynamicsContext);
         }
 
         [Test]
         public void GetContactsByReference_WithInput_ReturnsContactList()
         {
-
-            var contact = _classUnderTest.GetContactsByReference(housingref, personno);
+            var houseRef = "FakeHouseRef";
+            var personno = "FakePersonNo";
+            var contact = _classUnderTest.GetContactsByReference(houseRef, personno);
 
             Assert.That(contact, Is.InstanceOf<List<Contact>>());
         }
@@ -31,12 +33,16 @@ namespace UnitTests.V1.Gateways
         [Test]
         public void GetContactsByReference_WithReference_ReturnsCorrectContacts()
         {
-            var contact = _classUnderTest.GetContactsByReference(housingref, personno);
+            var houseRef = "FakeHouseRef";
+            var personno = "FakePersonNo";
+            var uprn = "FakeUprn";
+            var contact = _classUnderTest.GetContactsByReference(houseRef, personno);
 
             Assert.That(contact.Count, Is.Not.EqualTo(0));
-            Assert.That(contact.First(), Has.Property("HousingRef"));
-            Assert.That(contact.First(), Has.Property("HousingRef").EqualTo(housingref));
+            Assert.That(contact.First(), Has.Property("HouseRef"));
+            Assert.That(contact.First(), Has.Property("HouseRef").EqualTo(houseRef));
             Assert.That(contact.First(), Has.Property("Uprn").Not.Null);
+            Assert.That(contact.First(), Has.Property("Uprn").EqualTo(uprn));
         }
     }
 }
