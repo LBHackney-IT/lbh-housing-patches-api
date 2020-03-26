@@ -7,8 +7,10 @@ namespace lbh_housingpatches_api.V1.Gateways
     {
         public IEnumerable<Contact> GetContactsByReference(string housingref, string personno)
         {
-            var contact = new Contact{
-                HousingRef = housingref
+            var contact = new Contact
+            {
+                HousingRef = housingref,
+                Uprn = "some string"
             };
             return new List<Contact>{contact};
         }

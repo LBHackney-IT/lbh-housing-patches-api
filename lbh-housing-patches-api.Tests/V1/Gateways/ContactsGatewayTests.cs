@@ -36,6 +36,7 @@ namespace UnitTests.V1.Gateways
             Assert.That(contact.Count, Is.Not.EqualTo(0));
             Assert.That(contact.First(), Has.Property("HousingRef"));
             Assert.That(contact.First(), Has.Property("HousingRef").EqualTo(housingref));
+            Assert.That(contact.First(), Has.Property("Uprn").Not.Null);
         }
     }
 }
