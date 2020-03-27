@@ -41,10 +41,22 @@ namespace UnitTests.V1.Controllers
         public void GetContacts_ReturnsJsonResultContainingContactEntities()
         {
             var response = _classUnderTest.GetContacts();
-
             var contactsResponse = response.Value as ContactsResponse;
+            var firstContact = contactsResponse.Contacts[0];
 
-            Assert.That(contactsResponse.Contacts[0], Is.InstanceOf<Contact>());
+            Assert.That(firstContact, Is.InstanceOf<Contact>());
+        }
+
+        [Test]
+        public void GetContacts_ContactEntitiesPropertiesArePopulated()
+        {
+            var response = _classUnderTest.GetContacts();
+            var contactsResponse = response.Value as ContactsResponse;
+            var firstContact = contactsResponse.Contacts[0];
+
+            Assert.That(firstContact.HouseRef, Is.Not.Null);
+            Assert.That(firstContact.Uprn, Is.Not.Null);
+            Assert.That(firstContact.Address, Is.Not.Null);
         }
     }
 }
