@@ -10,26 +10,30 @@ namespace lbh_housingpatches_api.V1.Infrastructure
     {
         public HttpClient Client { get; set; }
 
-        public JObject Contacts { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+        public JObject Contacts
+        {
+            get => throw new NotImplementedException();
+            set => throw new NotImplementedException();
+        }
 
         public JObject FetchContactsJSon(string houseRef, string personno)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         private static HttpClient GetCrmClient()
         {
             var authorizationUrl = Environment.GetEnvironmentVariable("CRM_AUTH_URI");
-            var organizationUrl  = Environment.GetEnvironmentVariable("CRM_SVC_URI");
+            var organizationUrl = Environment.GetEnvironmentVariable("CRM_SVC_URI");
 
             var accessToken = GetAuthToken(authorizationUrl);
-            var client      = new HttpClient {BaseAddress = new Uri(organizationUrl)};
+            var client = new HttpClient {BaseAddress = new Uri(organizationUrl)};
 
             client.DefaultRequestHeaders.Add("OData-MaxVersion", "4.0");
-            client.DefaultRequestHeaders.Add("OData-Version",    "4.0");
+            client.DefaultRequestHeaders.Add("OData-Version", "4.0");
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             client.DefaultRequestHeaders.Add("Authorization", "Bearer " + accessToken);
-            client.DefaultRequestHeaders.Add("Prefer",        "return=representation");
+            client.DefaultRequestHeaders.Add("Prefer", "return=representation");
             client.DefaultRequestHeaders.Add("Prefer",
                 "odata.include-annotations=\"OData.Community.Display.V1.FormattedValue\"");
 

@@ -15,6 +15,7 @@ namespace UnitTests.V1.Controllers
         {
             _classUnderTest = new ContactsController();
         }
+
         [Test]
         public void GetContacts_ReturnsResponseWithStatus()
         {
@@ -22,8 +23,8 @@ namespace UnitTests.V1.Controllers
 
             Assert.That(response, Is.Not.Null);
             Assert.That(response.StatusCode, Is.EqualTo(200));
-
         }
+
         [Test]
         public void GetsContact_ReturnsJsonResult()
         {

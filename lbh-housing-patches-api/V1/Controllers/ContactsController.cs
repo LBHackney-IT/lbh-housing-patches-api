@@ -7,10 +7,10 @@ namespace lbh_housingpatches_api.V1.Controllers
     [Produces("application/json")]
     public class ContactsController
     {
-        [HttpGet]    
+        [HttpGet]
         public JsonResult GetContacts()
         {
-            return new JsonResult(""){StatusCode = 200};
+            return new JsonResult("") {StatusCode = 200};
         }
     }
 }

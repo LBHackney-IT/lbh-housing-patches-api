@@ -9,15 +9,19 @@ namespace UnitTests.V1.Helper
 {
     public class DynamicsContextStub : IDynamicsContext
     {
-        public JObject Contacts { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+        public JObject Contacts
+        {
+            get => throw new NotImplementedException();
+            set => throw new NotImplementedException();
+        }
 
         public JObject FetchContactsJSon(string houseRef, string personno)
         {
-            return new JObject 
-            { 
-                { "hackney_houseref", "FakeHouseRef" }, 
-                { "hackney_uprn", "FakeUprn" }, 
-                { "address1_composite", "FakeAddress" }
+            return new JObject
+            {
+                {"hackney_houseref", "FakeHouseRef"},
+                {"hackney_uprn", "FakeUprn"},
+                {"address1_composite", "FakeAddress"}
             };
         }
     }

@@ -4,7 +4,7 @@ using Newtonsoft.Json.Serialization;
 
 namespace lbh_housingpatches_api.V1.Controllers
 {
-    public class BaseController  : Controller
+    public class BaseController : Controller
     {
         public BaseController()
         {

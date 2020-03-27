@@ -5,7 +5,6 @@ using lbh_housingpatches_api.V1.Controllers;
 
 namespace UnitTests.V1.Controllers
 {
-
     [TestFixture]
     public class HealthCheckControllerTests
     {
