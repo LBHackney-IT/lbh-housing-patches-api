@@ -21,15 +21,8 @@ namespace lbh_housingpatches_api.V1.Gateways
         {
             var jsonContacts = _dynamicsContext.FetchContactsJSon(houseRef, personno);
             List<Contact> contacts = _contactFactory.FromJsonContacts(jsonContacts);
-            // var contact = new Contact
-            // {
-            //     HouseRef = jsonContacts["hackney_houseref"].ToString(),
-            //     Uprn = jsonContacts["hackney_uprn"].ToString(),
-            //     Address = jsonContacts["address1_composite"].ToString()
-            // };
 
             return contacts;
-            // return new List<Contact> {contact};
         }
     }
 }

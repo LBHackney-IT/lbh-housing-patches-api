@@ -1,6 +1,10 @@
+using System;
+using System.Linq;
+using lbh_housingpatches_api.V1.Boundary;
 using lbh_housingpatches_api.V1.Controllers;
 using lbh_housingpatches_api.V1.Domain;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using NUnit.Framework;
 
 namespace UnitTests.V1.Controllers
@@ -26,11 +30,21 @@ namespace UnitTests.V1.Controllers
         }
 
         [Test]
-        public void GetsContact_ReturnsJsonResult()
+        public void GetContacts_ReturnsJsonResult()
         {
             var response = _classUnderTest.GetContacts();
 
             Assert.That(response, Is.InstanceOf<JsonResult>());
+        }
+
+        [Test]
+        public void GetContacts_ReturnsJsonResultContainingContactEntities()
+        {
+            var response = _classUnderTest.GetContacts();
+
+            var contactsResponse = response.Value as ContactsResponse;
+
+            Assert.That(contactsResponse.Contacts[0], Is.InstanceOf<Contact>());
         }
     }
 }
