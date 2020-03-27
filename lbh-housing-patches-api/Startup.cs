@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using lbh_housingpatches_api.V1.Gateways;
+using lbh_housingpatches_api.V1.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -97,17 +99,19 @@ namespace lbh_housingpatches_api
                 if (File.Exists(xmlPath))
                     c.IncludeXmlComments(xmlPath);
             });
-            ConfigureDbContext(services);
+            ConfigureDynamicsContext(services);
             RegisterGateWays(services);
             RegisterUseCases(services);
         }
 
-        private static void ConfigureDbContext(IServiceCollection services)
+        private static void ConfigureDynamicsContext(IServiceCollection services)
         {
+            services.AddSingleton<IDynamicsContext, DynamicsContext>();
         }
 
         private static void RegisterGateWays(IServiceCollection services)
         {
+            services.AddSingleton<IContactsGateway, ContactsGateway>();
         }
 
         private static void RegisterUseCases(IServiceCollection services)

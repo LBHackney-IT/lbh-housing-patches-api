@@ -13,17 +13,22 @@ namespace UnitTests.V1.Controllers
     public class ContactsControllerTests
     {
         private ContactsController _classUnderTest;
+        private ContactsRequest _contactsRequest;
 
         [SetUp]
         public void SetUp()
         {
             _classUnderTest = new ContactsController();
+            _contactsRequest = new ContactsRequest
+            {
+                Uprn = "testUprn"
+            };
         }
 
         [Test]
         public void GetContacts_ReturnsResponseWithStatus()
         {
-            var response = _classUnderTest.GetContacts();
+            var response = _classUnderTest.GetContacts(_contactsRequest);
 
             Assert.That(response, Is.Not.Null);
             Assert.That(response.StatusCode, Is.EqualTo(200));
@@ -32,7 +37,7 @@ namespace UnitTests.V1.Controllers
         [Test]
         public void GetContacts_ReturnsJsonResult()
         {
-            var response = _classUnderTest.GetContacts();
+            var response = _classUnderTest.GetContacts(_contactsRequest);
 
             Assert.That(response, Is.InstanceOf<JsonResult>());
         }
@@ -40,7 +45,7 @@ namespace UnitTests.V1.Controllers
         [Test]
         public void GetContacts_ReturnsJsonResultContainingContactEntities()
         {
-            var response = _classUnderTest.GetContacts();
+            var response = _classUnderTest.GetContacts(_contactsRequest);
             var contactsResponse = response.Value as ContactsResponse;
             var firstContact = contactsResponse.Contacts[0];
 
@@ -50,7 +55,7 @@ namespace UnitTests.V1.Controllers
         [Test]
         public void GetContacts_ContactEntitiesPropertiesArePopulated()
         {
-            var response = _classUnderTest.GetContacts();
+            var response = _classUnderTest.GetContacts(_contactsRequest);
             var contactsResponse = response.Value as ContactsResponse;
             var firstContact = contactsResponse.Contacts[0];
 

@@ -4,6 +4,8 @@ using System.Linq;
 using lbh_housingpatches_api.V1.Boundary;
 using lbh_housingpatches_api.V1.Domain;
 using lbh_housingpatches_api.V1.Factories;
+using lbh_housingpatches_api.V1.Gateways;
+using lbh_housingpatches_api.V1.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 
@@ -14,19 +16,17 @@ namespace lbh_housingpatches_api.V1.Controllers
     [Produces("application/json")]
     public class ContactsController
     {
-        [HttpGet]
-        public JsonResult GetContacts()
-        {
-            var contactJson = new JObject
-            {
-                {"hackney_houseref", "House Ref"},
-                {"hackney_uprn", "UPRN"},
-                {"address1_composite", "Composite Address"}
-            };
+        private ContactsGateway _contactsGateway;
 
-            var factory = new ContactFactory();
-            var firstJsonContact = factory.FromJsonContacts(contactJson).First();
-            var contacts = new List<Contact>{firstJsonContact};
+        public ContactsController()
+        {
+            _contactsGateway = new ContactsGateway(new DynamicsContext());
+        }
+
+        [HttpGet]
+        public JsonResult GetContacts(ContactsRequest request)
+        {
+            var contacts = _contactsGateway.GetContactsByReference(request.Uprn);
 
             var result = new ContactsResponse(contacts, new ContactsRequest(), DateTime.Now);
 

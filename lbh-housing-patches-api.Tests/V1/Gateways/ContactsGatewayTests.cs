@@ -29,7 +29,7 @@ namespace UnitTests.V1.Gateways
         [Test]
         public void GetContactsByReference_WithInput_ReturnsContactList()
         {
-            var contact = _classUnderTest.GetContactsByReference(houseRef, personNo);
+            var contact = _classUnderTest.GetContactsByReference(houseRef);
 
             Assert.That(contact, Is.InstanceOf<List<Contact>>());
         }
@@ -37,7 +37,7 @@ namespace UnitTests.V1.Gateways
         [Test]
         public void GetContactsByReference_WithReference_ReturnsCorrectContactAddress()
         {
-            var contactsList = _classUnderTest.GetContactsByReference(houseRef, personNo);
+            var contactsList = _classUnderTest.GetContactsByReference(houseRef);
             var contact = contactsList.First();
 
             Assert.That(contactsList.Count(), Is.Not.EqualTo(0));

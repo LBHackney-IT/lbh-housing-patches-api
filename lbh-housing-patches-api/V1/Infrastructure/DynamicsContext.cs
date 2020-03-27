@@ -8,22 +8,22 @@ namespace lbh_housingpatches_api.V1.Infrastructure
 {
     public class DynamicsContext : IDynamicsContext
     {
-        public HttpClient Client { get; set; }
-
-        public JObject Contacts
+        private HttpClient _client;
+        public DynamicsContext()
         {
-            get => throw new NotImplementedException();
-            set => throw new NotImplementedException();
+            _client = GetCrmClient();
         }
 
-        public JObject FetchContactsJSon(string houseRef, string personno)
+        public JObject FetchContactsJSon(string uprn)
         {
-            throw new NotImplementedException();
+            return new JObject();
         }
 
         private static HttpClient GetCrmClient()
         {
-            var authorizationUrl = Environment.GetEnvironmentVariable("CRM_AUTH_URI");
+            var authorizationUrl = "http://sandboxapi.hackney.gov.uk/GetCRM365AccessToken";
+            // var authorizationUrl = Environment.GetEnvironmentVariable("CRM_AUTH_URI");
+            // var organizationUrl =
             var organizationUrl = Environment.GetEnvironmentVariable("CRM_SVC_URI");
 
             var accessToken = GetAuthToken(authorizationUrl);

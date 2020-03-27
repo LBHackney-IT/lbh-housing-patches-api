@@ -6,7 +6,7 @@ using lbh_housingpatches_api.V1.Infrastructure;
 
 namespace lbh_housingpatches_api.V1.Gateways
 {
-    public class ContactsGateway
+    public class ContactsGateway : IContactsGateway
     {
         private readonly IDynamicsContext _dynamicsContext;
         private readonly ContactFactory _contactFactory;
@@ -17,12 +17,11 @@ namespace lbh_housingpatches_api.V1.Gateways
             _contactFactory = new ContactFactory();
         }
 
-        public IEnumerable<Contact> GetContactsByReference(string houseRef, string personno)
+            public List<Contact> GetContactsByReference(string uprn)
         {
-            var jsonContacts = _dynamicsContext.FetchContactsJSon(houseRef, personno);
-            List<Contact> contacts = _contactFactory.FromJsonContacts(jsonContacts);
+            var jsonContacts = _dynamicsContext.FetchContactsJSon(uprn);
 
-            return contacts;
+            return _contactFactory.FromJsonContacts(jsonContacts);
         }
     }
 }
