@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using System.Linq;
 using lbh_housingpatches_api.V1.Domain;
+using lbh_housingpatches_api.V1.Factories;
 using lbh_housingpatches_api.V1.Infrastructure;
 
 namespace lbh_housingpatches_api.V1.Gateways
@@ -7,24 +9,27 @@ namespace lbh_housingpatches_api.V1.Gateways
     public class ContactsGateway
     {
         private readonly IDynamicsContext _dynamicsContext;
+        private readonly ContactFactory _contactFactory;
 
         public ContactsGateway(IDynamicsContext dynamicsContext)
         {
             _dynamicsContext = dynamicsContext;
+            _contactFactory = new ContactFactory();
         }
 
         public IEnumerable<Contact> GetContactsByReference(string houseRef, string personno)
         {
-            var jsonContact = _dynamicsContext.FetchContactsJSon(houseRef, personno);
-            var contact = new Contact 
-            { 
-                HouseRef = jsonContact["hackney_houseref"].ToString(), 
-                Uprn = jsonContact["hackney_uprn"].ToString(),
-                Address = jsonContact["address1_composite"].ToString()
+            var jsonContacts = _dynamicsContext.FetchContactsJSon(houseRef, personno);
+            List<Contact> contacts = _contactFactory.FromJsonContacts(jsonContacts);
+            // var contact = new Contact
+            // {
+            //     HouseRef = jsonContacts["hackney_houseref"].ToString(),
+            //     Uprn = jsonContacts["hackney_uprn"].ToString(),
+            //     Address = jsonContacts["address1_composite"].ToString()
+            // };
 
-            };
-
-            return new List<Contact>{ contact };
+            return contacts;
+            // return new List<Contact> {contact};
         }
     }
 }
