@@ -19,7 +19,7 @@ namespace lbh_housingpatches_api.V1.Gateways
 
             public List<Contact> GetContactsByReference(string uprn)
         {
-            var jsonContacts = _dynamicsContext.FetchContactsJSon(uprn);
+            var jsonContacts = _dynamicsContext.FetchContactsJSon(uprn).Result;
 
             return _contactFactory.FromJsonContacts(jsonContacts);
         }

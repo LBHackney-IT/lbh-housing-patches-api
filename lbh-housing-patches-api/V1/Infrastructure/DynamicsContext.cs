@@ -1,6 +1,7 @@
 using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -9,21 +10,28 @@ namespace lbh_housingpatches_api.V1.Infrastructure
     public class DynamicsContext : IDynamicsContext
     {
         private HttpClient _client;
+        public string CrmUri = Environment.GetEnvironmentVariable("CRM_SVC_URI") + "/api/data/v8.2/";
+
         public DynamicsContext()
         {
             _client = GetCrmClient();
         }
 
-        public JObject FetchContactsJSon(string uprn)
+        public async Task<JObject> FetchContactsJSon(string uprn)
         {
-            return new JObject();
+            Console.WriteLine(CrmUri);
+            var requestUri = new Uri($"{CrmUri}contacts?$filter=contains(hackney_uprn, '{uprn}')");
+            Console.WriteLine(requestUri);
+            var response = await _client.GetStringAsync(requestUri);
+            Console.WriteLine(response);
+            return JsonConvert.DeserializeObject<JObject>(response);
+
+;
         }
 
         private static HttpClient GetCrmClient()
         {
-            var authorizationUrl = "http://sandboxapi.hackney.gov.uk/GetCRM365AccessToken";
-            // var authorizationUrl = Environment.GetEnvironmentVariable("CRM_AUTH_URI");
-            // var organizationUrl =
+            var authorizationUrl = Environment.GetEnvironmentVariable("CRM_AUTH_URI");
             var organizationUrl = Environment.GetEnvironmentVariable("CRM_SVC_URI");
 
             var accessToken = GetAuthToken(authorizationUrl);

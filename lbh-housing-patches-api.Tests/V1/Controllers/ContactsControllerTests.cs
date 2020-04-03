@@ -3,9 +3,12 @@ using System.Linq;
 using lbh_housingpatches_api.V1.Boundary;
 using lbh_housingpatches_api.V1.Controllers;
 using lbh_housingpatches_api.V1.Domain;
+using lbh_housingpatches_api.V1.Gateways;
+using lbh_housingpatches_api.V1.UseCase;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using NUnit.Framework;
+using UnitTests.V1.Helper;
 
 namespace UnitTests.V1.Controllers
 {
@@ -18,10 +21,10 @@ namespace UnitTests.V1.Controllers
         [SetUp]
         public void SetUp()
         {
-            _classUnderTest = new ContactsController();
+            _classUnderTest = new ContactsController(new ListContacts(new ContactsGateway(new DynamicsContextStub())));
             _contactsRequest = new ContactsRequest
             {
-                Uprn = "testUprn"
+                Uprn = "100088888888"
             };
         }
 

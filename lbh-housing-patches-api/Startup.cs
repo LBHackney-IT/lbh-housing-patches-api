@@ -20,6 +20,7 @@ using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using lbh_housingpatches_api.V1.UseCase;
 
 namespace lbh_housingpatches_api
 {
@@ -116,6 +117,8 @@ namespace lbh_housingpatches_api
 
         private static void RegisterUseCases(IServiceCollection services)
         {
+            services.AddSingleton<IListContacts, ListContacts>();
+
         }
 
 

@@ -17,7 +17,7 @@ namespace UnitTests.V1.Infrastructure
         public void FetchContactsJson_FetchesJson()
         {
             var testUprn = "test UPRN";
-            var contextResponse = _dynamicsContext.FetchContactsJSon(testUprn);
+            var contextResponse = _dynamicsContext.FetchContactsJSon(testUprn).Result;
 
             Assert.That(contextResponse, Is.Not.Null);
 

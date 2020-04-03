@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using lbh_housingpatches_api.V1.Infrastructure;
 using Newtonsoft.Json.Linq;
 
@@ -6,15 +7,25 @@ namespace UnitTests.V1.Helper
 {
     public class DynamicsContextStub : IDynamicsContext
     {
-        public JObject Contacts
+        Task<JObject> IDynamicsContext.FetchContactsJSon(string uprn)
         {
-            get => throw new NotImplementedException();
-            set => throw new NotImplementedException();
-        }
+            var payloadContent = new JArray();
+            var contactObject = new JObject(){
+                {"hackney_houseref", "8888888"},
+                {"hackney_uprn", uprn},
+                {"address1_composite", "123 FAKE STREET\r\nHACKNEY\r\nE8 8EE"}
+            };
+            
+            payloadContent.Add(contactObject);
 
-        public JObject FetchContactsJSon(string uprn)
-        {
-            return DynamicsHelpers.CreateContactJObject();
+            var response = new JObject(){
+                {"@odata.context", "{CRM_SVC_URI}api/data/v8.2/$metadata#contacts"},
+                {"value", payloadContent}
+            };
+          
+            var responseTask = Task.FromResult(response);
+            
+            return responseTask;
         }
     }
 }

@@ -11,10 +11,10 @@ namespace UnitTests.V1.Gateways
     [TestFixture]
     public class ContactsGatewayTest
     {
-        private const string houseRef = "FakeHouseRef";
-        private const string personNo = "FakePersonNo";
-        private const string uprn = "FakeUprn";
-        private const string address = "FakeAddress";
+        private const string houseRef = "8888888";
+        private const string personNo = "8";
+        private const string uprn = "100088888888";
+        private const string address = "123 FAKE STREET\r\nHACKNEY\r\nE8 8EE";
 
         private ContactsGateway _classUnderTest;
         private DynamicsContextStub _dynamicsContext;
@@ -29,7 +29,7 @@ namespace UnitTests.V1.Gateways
         [Test]
         public void GetContactsByReference_WithInput_ReturnsContactList()
         {
-            var contact = _classUnderTest.GetContactsByReference(houseRef);
+            var contact = _classUnderTest.GetContactsByReference(uprn);
 
             Assert.That(contact, Is.InstanceOf<List<Contact>>());
         }
@@ -37,7 +37,7 @@ namespace UnitTests.V1.Gateways
         [Test]
         public void GetContactsByReference_WithReference_ReturnsCorrectContactAddress()
         {
-            var contactsList = _classUnderTest.GetContactsByReference(houseRef);
+            var contactsList = _classUnderTest.GetContactsByReference(uprn);
             var contact = contactsList.First();
 
             Assert.That(contactsList.Count(), Is.Not.EqualTo(0));
