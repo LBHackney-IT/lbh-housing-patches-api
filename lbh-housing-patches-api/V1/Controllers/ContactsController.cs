@@ -25,8 +25,10 @@ namespace lbh_housingpatches_api.V1.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetContacts(ContactsRequest request)
+        public JsonResult GetContacts([FromBody] ContactsRequest request)
         {
+            if (request.Uprn == null) throw new ArgumentNullException("Uprn is required.");
+
             var useCaseResponse = _listContacts.Execute(request);
             var jsonResult = new JsonResult(useCaseResponse) {StatusCode = 200};
             return jsonResult;

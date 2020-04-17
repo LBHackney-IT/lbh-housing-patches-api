@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using lbh_housingpatches_api.V1.Factories;
 using lbh_housingpatches_api.V1.Infrastructure;
@@ -11,7 +12,7 @@ namespace UnitTests.V1.Factories
     public class ContactFactoryTests
     {
         private IDynamicsContext _dynamicsContext;
-        
+
         [SetUp]
         public void SetUp()
         {
@@ -21,7 +22,8 @@ namespace UnitTests.V1.Factories
         [Test]
         public void CanBeCreatedFromJsonObject()
         {
-            var firstContactJson = _dynamicsContext.FetchContactsJSon("100088888888").Result;
+            var firstContactJson = _dynamicsContext.FetchContactsJSon("junk").Result;
+            Console.WriteLine(firstContactJson);
 
             var contactFromFactory = new ContactFactory().FromJsonContacts(firstContactJson).First();
 

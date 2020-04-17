@@ -66,5 +66,19 @@ namespace UnitTests.V1.Controllers
             Assert.That(firstContact.Uprn, Is.Not.Null);
             Assert.That(firstContact.Address, Is.Not.Null);
         }
+
+        [Test]
+        public void GetContacts_WithoutArguments_ReturnsError()
+        {
+            var _badContactsRequest = new ContactsRequest
+            {
+                Uprn = null
+            };
+
+            Assert.That(() => { _classUnderTest.GetContacts(_badContactsRequest); },
+                Throws.ArgumentNullException);
+            Assert.That(() => { _classUnderTest.GetContacts(_badContactsRequest); },
+                Throws.ArgumentNullException.With.Property("Message"));
+        }
     }
 }
