@@ -25,8 +25,18 @@ namespace lbh_housingpatches_api.V1.Infrastructure
             var response = await _client.GetStringAsync(requestUri);
             Console.WriteLine(response);
             return JsonConvert.DeserializeObject<JObject>(response);
+        }
 
-;
+        public async Task<JObject> FetchPatchJson(Guid hackneyPropertyAreaPatchId)
+        {
+            var guidString = Guid.NewGuid();
+            var requestUri = new Uri(
+                $"{CrmUri}hackney_propertyareapatchs?$filter=contains(hackney_propertyareapatchid, '{guidString}')"
+                );
+
+            var response = await _client.GetStringAsync(requestUri);
+
+            return JsonConvert.DeserializeObject<JObject>(response);
         }
 
         private static HttpClient GetCrmClient()
