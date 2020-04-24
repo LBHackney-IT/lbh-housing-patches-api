@@ -27,7 +27,7 @@ namespace UnitTests.V1.Infrastructure
         [Test]
         public void FetchPatchJson_FetchesJson()
         {
-            var guid = Guid.NewGuid();
+            var guid = Guid.NewGuid().ToString();
             var contextResponse = _dynamicsContext.FetchPatchJson(guid).Result;
 
             Assert.That(contextResponse, Is.Not.Null);

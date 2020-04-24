@@ -39,7 +39,7 @@ namespace lbh_housingpatches_api.V1.Infrastructure
             return JsonConvert.DeserializeObject<JObject>(response);
         }
 
-        public async Task<JObject> FetchPatchJson(Guid hackneyPropertyAreaPatchId)
+        public async Task<JObject> FetchPatchJson(string guid)
         {
             var guidString = Guid.NewGuid();
             var requestUri = new Uri(

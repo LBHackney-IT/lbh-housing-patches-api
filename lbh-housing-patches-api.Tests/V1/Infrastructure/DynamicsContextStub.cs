@@ -27,5 +27,23 @@ namespace UnitTests.V1.Helper
             
             return responseTask;
         }
+
+        Task<JObject> IDynamicsContext.FetchPatchJson(string guid)
+        {
+            var payloadContent = new JArray();
+            var addressObject = new JObject(){
+                {"hackney_shortaddress", "123 FAKE STREET"}
+            };
+
+            payloadContent.Add(addressObject);
+            
+            var response = new JObject(){
+                {"@odata.context", "{CRM_SVC_URI}api/data/v8.2/$hackney_propertyareapatchs"},
+                {"value", payloadContent}
+            };
+          
+            var responseTask = Task.FromResult(response);
+            
+            return responseTask;        }    
     }
 }
