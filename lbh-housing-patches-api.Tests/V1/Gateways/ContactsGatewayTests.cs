@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using lbh_housingpatches_api.V1.Domain;
-using lbh_housingpatches_api.V1.Factories;
 using lbh_housingpatches_api.V1.Gateways;
 using NUnit.Framework;
 using UnitTests.V1.Helper;
