@@ -1,5 +1,6 @@
 using System;
 using lbh_housingpatches_api.V1.Infrastructure;
+using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 
 namespace UnitTests.V1.Infrastructure
@@ -21,7 +22,6 @@ namespace UnitTests.V1.Infrastructure
             var contextResponse = _dynamicsContext.FetchContactsJSon(testUprn).Result;
 
             Assert.That(contextResponse, Is.Not.Null);
-
         }
 
         [Test]
@@ -31,6 +31,7 @@ namespace UnitTests.V1.Infrastructure
             var contextResponse = _dynamicsContext.FetchPatchJson(guid).Result;
 
             Assert.That(contextResponse, Is.Not.Null);
+            Assert.That(contextResponse, Is.InstanceOf<JObject>());
         }
     }
 }
