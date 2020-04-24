@@ -20,7 +20,19 @@ namespace lbh_housingpatches_api.V1.Infrastructure
         public async Task<JObject> FetchContactsJSon(string uprn)
         {
             Console.WriteLine(CrmUri);
-            var requestUri = new Uri($"{CrmUri}contacts?$filter=contains(hackney_uprn, '{uprn}')");
+            var requestUri = new Uri(
+                $@"{CrmUri}contacts?fetchXml=
+                <fetch version = '1.0' output-format='xml-platform' distinct='true'>
+                    <entity name='contact'>
+                        <attribute name='hackney_uprn' />
+                        <attribute name='hackney_houseref' />
+                        <attribute name='address1_composite' />
+                        <filter>
+                            <condition attribute='hackney_uprn' operator='eq' value='{uprn}' />
+                        </filter>
+                    </entity>    
+                </fetch>"
+                );
             Console.WriteLine(requestUri);
             var response = await _client.GetStringAsync(requestUri);
             Console.WriteLine(response);
@@ -31,8 +43,17 @@ namespace lbh_housingpatches_api.V1.Infrastructure
         {
             var guidString = Guid.NewGuid();
             var requestUri = new Uri(
-                $"{CrmUri}hackney_propertyareapatchs?$filter=contains(hackney_propertyareapatchid, '{guidString}')"
-                );
+                $@"{CrmUri}hackney_propertyareapatchs?fetchXml=
+                <fetch version = '1.0' output-format='xml-platform' distinct='true'>
+                    <entity name='hackney_propertyareapatch'>
+                        <attribute name='hackney_propertyareapatchid' />
+                        <attribute name='hackney_estateaddress' />
+                        <filter>
+                            <condition attribute='hackney_propertyareapatchid' operator='eq' value=""116c941e-9a53-e811-8123-70106faa0331"" />
+                        </filter>
+                    </entity>
+                </fetch>"
+            );
 
             var response = await _client.GetStringAsync(requestUri);
 
