@@ -11,9 +11,11 @@ namespace lbh_housingpatches_api
             CreateWebHostBuilder(args).Build().Run();
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args)
+        {
+            return WebHost.CreateDefaultBuilder(args)
                 .UseSentry(Environment.GetEnvironmentVariable("SENTRY_URL"))
                 .UseStartup<Startup>();
+        }
     }
 }

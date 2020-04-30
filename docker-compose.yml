@@ -8,9 +8,19 @@ services:
       dockerfile: ./Dockerfile
     ports:
       - 3000:3000
+    environment: 
+      - CRM_AUTH_URI=${CRM_AUTH_URI}
+      - CRM_SVC_URI=${CRM_SVC_URI}
+      - ASPNETCORE_ENVIRONMENT=Development
 
   lbh-housing-patches-api-test:
     image: lbh-housing-patches-api-test
     build:
       context: .
       dockerfile: lbh-housing-patches-api.Tests/Dockerfile
+    environment: 
+      - CRM_AUTH_URI=${CRM_AUTH_URI}
+      - CRM_SVC_URI=${CRM_SVC_URI}
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports: 
+      - 3000:3000

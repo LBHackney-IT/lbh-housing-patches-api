@@ -16,15 +16,20 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="V1\Domain"/>
-    <Folder Include="V1\Factories"/>
-    <Folder Include="V1\Gateways"/>
-    <Folder Include="V1\Helper"/>
-    <Folder Include="V1\Infrastructure"/>
+    <Folder Include="V1\Domain" />
+    <Folder Include="V1\Gateways" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\lbh-housing-patches-api\lbh-housing-patches-api.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Properties\launchSettings.json">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

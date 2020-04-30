@@ -1,12 +1,10 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using NUnit.Framework;
-using lbh_housingpatches_api.Controllers.V1;
-using lbh_housingpatches_api.UseCase.V1;
+using lbh_housingpatches_api.V1.Controllers;
 
 namespace UnitTests.V1.Controllers
 {
-
     [TestFixture]
     public class HealthCheckControllerTests
     {
@@ -20,20 +18,13 @@ namespace UnitTests.V1.Controllers
         }
 
         [Test]
-        public void ReturnsResponseWithStatus()
+        public void HealthCheck_ReturnsResponseWithStatus()
         {
             var response = _classUnderTest.HealthCheck() as OkObjectResult;
 
-            Assert.NotNull(response);
-            Assert.AreEqual(response.StatusCode, 200);
-            Assert.AreEqual(new Dictionary<string, object> {{"success", true}}, response.Value);
-
-        }
-
-        [Test]
-        public void ThrowErrorThrows()
-        {
-            Assert.Throws<TestOpsErrorException>(_classUnderTest.ThrowError);
+            Assert.That(response, Is.Not.Null);
+            Assert.That(response.StatusCode, Is.EqualTo(200));
+            Assert.That(new Dictionary<string, object> {{"success", true}}, Is.EqualTo(response.Value));
         }
     }
 }
