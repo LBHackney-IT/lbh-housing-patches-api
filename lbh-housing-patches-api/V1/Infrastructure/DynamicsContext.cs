@@ -11,15 +11,16 @@ namespace lbh_housingpatches_api.V1.Infrastructure
     {
         private HttpClient _client;
         public string CrmUri = Environment.GetEnvironmentVariable("CRM_SVC_URI") + "/api/data/v8.2/";
+        private HttpMessageHandler _messageHandler;
 
-        public DynamicsContext()
+        public DynamicsContext(HttpMessageHandler handler = null)
         {
-            _client = GetCrmClient();
+            _messageHandler = handler;
+            _client = GetCrmClient(_messageHandler);
         }
 
         public async Task<JObject> FetchContactsJSon(string uprn)
         {
-            Console.WriteLine(CrmUri);
             var requestUri = new Uri(
                 $@"{CrmUri}contacts?fetchXml=
                 <fetch version = '1.0' output-format='xml-platform' distinct='true'>
@@ -33,9 +34,7 @@ namespace lbh_housingpatches_api.V1.Infrastructure
                     </entity>    
                 </fetch>"
                 );
-            Console.WriteLine(requestUri);
             var response = await _client.GetStringAsync(requestUri);
-            Console.WriteLine(response);
             return JsonConvert.DeserializeObject<JObject>(response);
         }
 
@@ -60,13 +59,15 @@ namespace lbh_housingpatches_api.V1.Infrastructure
             return JsonConvert.DeserializeObject<JObject>(response);
         }
 
-        private static HttpClient GetCrmClient()
+        private static HttpClient GetCrmClient(HttpMessageHandler messageHandler)
         {
             var authorizationUrl = Environment.GetEnvironmentVariable("CRM_AUTH_URI");
             var organizationUrl = Environment.GetEnvironmentVariable("CRM_SVC_URI");
 
             var accessToken = GetAuthToken(authorizationUrl);
-            var client = new HttpClient {BaseAddress = new Uri(organizationUrl)};
+            var client = messageHandler != null                                         ? 
+                new HttpClient(messageHandler) {BaseAddress = new Uri(organizationUrl)} :
+                new HttpClient() {BaseAddress = new Uri(organizationUrl)};
 
             client.DefaultRequestHeaders.Add("OData-MaxVersion", "4.0");
             client.DefaultRequestHeaders.Add("OData-Version", "4.0");
@@ -79,7 +80,7 @@ namespace lbh_housingpatches_api.V1.Infrastructure
             return client;
         }
 
-        public static string GetAuthToken(string authorizationUrl)
+        private static string GetAuthToken(string authorizationUrl)
         {
             var token = JsonConvert.DeserializeObject<JObject>(new HttpClient()
                 .GetAsync(authorizationUrl)
