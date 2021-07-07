@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
@@ -22,11 +22,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="V1\Domain"/>
-    <Folder Include="V1\Factories"/>
-    <Folder Include="V1\Gateways"/>
-    <Folder Include="V1\Helper"/>
-    <Folder Include="V1\Infrastructure"/>
+    <Folder Include="V1\Domain" />
+    <Folder Include="V1\Helper" />
   </ItemGroup>
 
 </Project>

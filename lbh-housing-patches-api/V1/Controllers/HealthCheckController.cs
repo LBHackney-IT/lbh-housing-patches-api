@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using lbh_housingpatches_api.UseCase.V1;
 
-namespace lbh_housingpatches_api.Controllers.V1
+namespace lbh_housingpatches_api.V1.Controllers
 {
     [Route("api/v1/healthcheck")]
     [ApiController]
@@ -18,13 +17,5 @@ namespace lbh_housingpatches_api.Controllers.V1
 
             return Ok(result);
         }
-
-        [HttpGet]
-        [Route("error")]
-        public void ThrowError()
-        {
-            ThrowOpsErrorUsecase.Execute();
-        }
-
     }
 }

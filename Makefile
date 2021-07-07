@@ -12,7 +12,7 @@ serve:
 
 .PHONY: shell
 shell:
-	docker-compose run lbh-housing-patches-api bash
+	docker-compose run lbh-housing-patches-api sh
 
 .PHONY: test
 test:
